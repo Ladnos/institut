@@ -51,7 +51,7 @@ $(document).ready(function () {
                     </div>
                     <div v-else>
                         <h4 class="underline">
-                            <a :href="logout.url()" class="register-link">Выход</a>
+                            <Link method="post" :href="logout.url()" class="register-link">Выход</Link>
                         </h4>
                     </div>
                 </div>
