@@ -105,6 +105,7 @@ return [
         ),
     ],
 
+    'admin_secret_key' => env('APP_SECRET_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
