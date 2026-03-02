@@ -18,6 +18,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'isAdmin'])->name('dashboard');
 
 Route::get('/lab3/create/Form', [ArticleController::class, 'createFormArticle'])->name('lab51')->middleware('auth');
+Route::get('/lab3/{lab3}', [ArticleController::class, 'show'])->name('lab3.show');
 Route::post('/lab3/store', [ArticleController::class, 'store'])->middleware('auth');
 
 
@@ -28,7 +29,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/lab8', fn()=> Inertia::render('Lab8',['articles' => Article::all()]))->name('lab8');
     Route::get('/lab1-2', fn()=> Inertia::render('Lab1-2'))->name('lab2');
     Route::get('/lab3/all', [ArticleController::class, 'all'])->name('lab41');
-    Route::resource('/lab3',ArticleController::class)->except('store');
+    Route::resource('/lab3',ArticleController::class)->except(['store', 'show']);
 });
 
 require __DIR__.'/settings.php';
