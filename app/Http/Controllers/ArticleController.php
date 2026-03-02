@@ -26,7 +26,7 @@ class ArticleController extends Controller
     public function create()
     {
         $user = Auth::user();
-        Article::factory()->create(['user_id'=> $user->id]);
+        Article::factory()->create(['user_id' => $user->id]);
         return Article::all();
     }
 
@@ -34,7 +34,7 @@ class ArticleController extends Controller
     {
         if (Auth::user()->isAdmin) {
             return Inertia::render('Lab5');
-        }else{
+        } else {
             return Inertia::render('CreateArticle');
         }
     }
@@ -45,9 +45,9 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         Auth::user()->articles()->create($request->validated());
-        if (Auth::user()->isAdmin) {
+        if (Auth::user()?->isAdmin) {
             return redirect()->back();
-        }else{
+        } else {
             return redirect()->route('home');
         }
     }
@@ -57,7 +57,11 @@ class ArticleController extends Controller
      */
     public function show(Article $lab3)
     {
-        return Inertia::render('Lab4', ['article'=>$lab3]);
+        if (Auth::user()?->isAdmin) {
+            return Inertia::render('Lab4', ['article' => $lab3]);
+        } else {
+            return Inertia::render('ShowArticle', ['article' => $lab3]);
+        }
     }
 
     /**
